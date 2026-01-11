@@ -22,9 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\Context\" />
     <Folder Include="Application\Controllers\" />
-    <Folder Include="Application\Models\" />
   </ItemGroup>
 
 </Project>
