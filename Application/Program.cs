@@ -1,5 +1,4 @@
-
-namespace rest_api_labb
+namespace rest_api_labb.Application
 {
     public class Program
     {
