@@ -13,16 +13,5 @@ namespace rest_api_labb.Application.Controllers
         {
             _context = context;
         }
-
-        [HttpGet]
-        public async Task<IActionResult> GetInterestsByPerson(int personId)
-        {
-            var interests = await _context.People
-                .Where(p => p.PersonId == personId)
-                .Select(p => p.Interests)
-                .ToListAsync();
-
-            return Ok(interests);
-        }
     }
 }
