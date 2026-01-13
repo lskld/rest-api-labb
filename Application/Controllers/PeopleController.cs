@@ -37,5 +37,17 @@ namespace rest_api_labb.Application.Controllers
 
             return Ok(interests);
         }
+
+        [HttpGet("{personId}/interests/links")]
+        public async Task<IActionResult> GetLinksByPerson(int personId)
+        {
+            var links = await _context.People
+                .Where(p => p.PersonId == personId)
+                .SelectMany(p => p.Links)
+                .Select(l => l.LinkUrl)
+                .ToListAsync();
+
+            return Ok(links);
+        }
     }
 }
