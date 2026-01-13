@@ -49,5 +49,27 @@ namespace rest_api_labb.Application.Controllers
 
             return Ok(links);
         }
+
+        [HttpPost("{personId}/interests/{interestId}")]
+        public async Task<IActionResult> ConnectInterestToPerson(int personId, int interestId)
+        {
+            var person = await _context.People
+                .Include(p => p.Interests)
+                .Where(p => p.PersonId == personId)
+                .FirstOrDefaultAsync();
+
+            var interest = await _context.Interests
+                .Where(i => i.InterestId == interestId)
+                .FirstOrDefaultAsync();
+
+            if (person == null || interest == null)
+            {
+                return NotFound("The person or interest was not found");
+            }
+
+            person.Interests.Add(interest);
+            await _context.SaveChangesAsync();
+            return Ok($"{person.FirstName} is now connected to interest: {interest.InterestName}");
+        }
     }
 }
